@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate  } from 'react-router-dom';
+import { Route, Routes, useNavigate  } from 'react-router-dom';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import app from './firebase'
 import Home from './Home';
@@ -9,6 +9,7 @@ import Dashboard from './Dashboard';
 const App = () => {
   const [ currentUser, setCurrentUser] = useState({})
   const navigate = useNavigate();
+
 
   const handleGoogleClick = () => {
     const provider = new GoogleAuthProvider();
@@ -48,7 +49,7 @@ const App = () => {
     
       <Routes>
         <Route path="/" exact element={<Home/>} />
-        <Route path="/register" element={<Register handleGoogleClick={handleGoogleClick} currentUser={currentUser}/>} />
+        <Route path="/register" element={<Register handleGoogleClick={handleGoogleClick} setCurrentUser={setCurrentUser}/>} />
         <Route path="/dashboard" element={<Dashboard currentUser={currentUser}/>} />
       </Routes>
   );

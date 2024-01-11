@@ -1,8 +1,10 @@
 import { useState } from "react";
-
+import app from './firebase'
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 //import provider from './firebase'
 
-const Register = ({handleGoogleClick}) => {
+const Register = ({handleGoogleClick, setCurrentUser}) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -11,6 +13,7 @@ const Register = ({handleGoogleClick}) => {
   });
 
   const [passwordStrength, setPasswordStrength] = useState("");
+  const navigate = useNavigate()
 
   /*const handleGoogleClick = () => {
     const provider = new GoogleAuthProvider();
@@ -67,7 +70,24 @@ const Register = ({handleGoogleClick}) => {
       alert("Passwords do not match!");
       return;
     }
-    // Additional validation logic and registration process can be added here
+    const auth = getAuth(app)
+    createUserWithEmailAndPassword(auth, formData.email, formData.password)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    console.log(user)
+    user.providerData[0].displayName = formData.fullName
+    console.log(user)
+    setCurrentUser(user)
+    navigate('/dashboard')
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage)
+    // ..
+  });
     alert("Registration Successful!");
   };
 
@@ -168,7 +188,7 @@ const Register = ({handleGoogleClick}) => {
             Register
           </button>
           <button
-            className="w-full bg-blue-600 text-white py-2 px-6 rounded-full font-bold hover:bg-blue-500"
+            className="w-full bg-blue-600 mt-3 text-white py-2 px-6 rounded-full font-bold hover:bg-blue-500"
             type="button"
             onClick={handleGoogleClick}
           >
