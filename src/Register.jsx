@@ -1,14 +1,47 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
-const Register = () => {
+//import provider from './firebase'
+
+const Register = ({handleGoogleClick}) => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
-  const [passwordStrength, setPasswordStrength] = useState('');
+  const [passwordStrength, setPasswordStrength] = useState("");
+
+  /*const handleGoogleClick = () => {
+    const provider = new GoogleAuthProvider();
+    provider.addScope("profile");
+    provider.addScope("email");
+    const auth = getAuth(app);
+    console.log(auth)
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        console.log(token);
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+        console.log(errorMessage);
+      });
+  };*/
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,13 +50,13 @@ const Register = () => {
     // Basic password strength indication (for demonstration purposes)
     const passwordLength = value.length;
     if (passwordLength === 0) {
-      setPasswordStrength('');
+      setPasswordStrength("");
     } else if (passwordLength < 6) {
-      setPasswordStrength('Weak');
+      setPasswordStrength("Weak");
     } else if (passwordLength < 10) {
-      setPasswordStrength('Moderate');
+      setPasswordStrength("Moderate");
     } else {
-      setPasswordStrength('Strong');
+      setPasswordStrength("Strong");
     }
   };
 
@@ -31,20 +64,25 @@ const Register = () => {
     e.preventDefault();
     // Basic validation (you can enhance this as needed)
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match!');
+      alert("Passwords do not match!");
       return;
     }
     // Additional validation logic and registration process can be added here
-    alert('Registration Successful!');
+    alert("Registration Successful!");
   };
 
   return (
     <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 min-h-screen flex items-center justify-center font-poppins">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md">
-        <h2 className="text-3xl font-bold mb-6 text-center">Create Your Account</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center">
+          Create Your Account
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-semibold mb-2" htmlFor="fullName">
+            <label
+              className="block text-gray-600 text-sm font-semibold mb-2"
+              htmlFor="fullName"
+            >
               Full Name
             </label>
             <input
@@ -59,7 +97,10 @@ const Register = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-semibold mb-2" htmlFor="email">
+            <label
+              className="block text-gray-600 text-sm font-semibold mb-2"
+              htmlFor="email"
+            >
               Email Address
             </label>
             <input
@@ -76,7 +117,10 @@ const Register = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-600 text-sm font-semibold mb-2" htmlFor="password">
+            <label
+              className="block text-gray-600 text-sm font-semibold mb-2"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -90,14 +134,19 @@ const Register = () => {
               required
             />
             {passwordStrength && (
-              <p className={`text-sm mt-2 text-${passwordStrength.toLowerCase()}`}>
+              <p
+                className={`text-sm mt-2 text-${passwordStrength.toLowerCase()}`}
+              >
                 Password Strength: {passwordStrength}
               </p>
             )}
           </div>
 
           <div className="mb-6">
-            <label className="block text-gray-600 text-sm font-semibold mb-2" htmlFor="confirmPassword">
+            <label
+              className="block text-gray-600 text-sm font-semibold mb-2"
+              htmlFor="confirmPassword"
+            >
               Confirm Password
             </label>
             <input
@@ -117,6 +166,13 @@ const Register = () => {
             type="submit"
           >
             Register
+          </button>
+          <button
+            className="w-full bg-blue-600 text-white py-2 px-6 rounded-full font-bold hover:bg-blue-500"
+            type="button"
+            onClick={handleGoogleClick}
+          >
+            Sign up with Google
           </button>
         </form>
       </div>
