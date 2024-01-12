@@ -7,7 +7,7 @@ const Messages = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 min-h-screen font-poppins">
+    <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 min-h-screen h-full font-poppins">
       {/* Messages Section */}
       <div className="bg-white p-6 rounded-lg shadow-md max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold mb-6">Messages</h2>

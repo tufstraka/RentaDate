@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 const Dashboard = ({ currentUser }) => {
   return (
     <div className="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 min-h-screen font-poppins">
+
+
       {/* User Profile Section */}
       <div className="bg-white p-6 rounded-lg shadow-md max-w-3xl mx-auto mb-8">
         <h2 className="text-3xl font-bold mb-6">My Profile</h2>
@@ -56,13 +58,7 @@ const Dashboard = ({ currentUser }) => {
         </div>
       </div>
 
-      {/* Message Icon - Link to Messages Component */}
-      <Link
-        to="/messages"
-        className="fixed bottom-8 right-8 text-3xl text-white"
-      >
-        <FontAwesomeIcon icon={faComment} />
-      </Link>
+      
 
       {/* Recent Activity Section */}
       <div className="bg-white p-6 rounded-lg shadow-md max-w-3xl mx-auto">
