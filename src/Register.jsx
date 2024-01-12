@@ -1,10 +1,11 @@
 import { useState } from "react";
-import app from './firebase'
+import app from "./firebase";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 //import provider from './firebase'
 
-const Register = ({handleGoogleClick, setCurrentUser}) => {
+const Register = ({ handleGoogleClick, setCurrentUser }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -13,7 +14,7 @@ const Register = ({handleGoogleClick, setCurrentUser}) => {
   });
 
   const [passwordStrength, setPasswordStrength] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   /*const handleGoogleClick = () => {
     const provider = new GoogleAuthProvider();
@@ -70,24 +71,24 @@ const Register = ({handleGoogleClick, setCurrentUser}) => {
       alert("Passwords do not match!");
       return;
     }
-    const auth = getAuth(app)
+    const auth = getAuth(app);
     createUserWithEmailAndPassword(auth, formData.email, formData.password)
-  .then((userCredential) => {
-    // Signed up 
-    const user = userCredential.user;
-    console.log(user)
-    user.providerData[0].displayName = formData.fullName
-    console.log(user)
-    setCurrentUser(user)
-    navigate('/dashboard')
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode, errorMessage)
-    // ..
-  });
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        console.log(user);
+        user.providerData[0].displayName = formData.fullName;
+        console.log(user);
+        setCurrentUser(user);
+        navigate("/dashboard");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ..
+      });
     alert("Registration Successful!");
   };
 
@@ -195,6 +196,16 @@ const Register = ({handleGoogleClick, setCurrentUser}) => {
             Sign up with Google
           </button>
         </form>
+        <div className="mt-4">
+          <span className="block text-gray-600 text-sm font-semibold mb-2">
+            Already have an account?
+          </span>
+          <Link to="/login">
+            <button className="w-full bg-pink-500 text-white py-2 px-6 rounded-full font-bold hover:bg-pink-400">
+              Login
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

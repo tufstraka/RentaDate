@@ -1,5 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faHeart, faComment, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faHeart,
+  faComment,
+  faUserFriends,
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Dashboard = ({ currentUser }) => {
   return (
@@ -21,8 +27,8 @@ const Dashboard = ({ currentUser }) => {
           </div>
         </div>
         <p className="mt-4 text-gray-600">
-          Fun-loving adventurer with a passion for creating memorable moments. Looking for someone to share
-          laughter and adventures with.
+          Fun-loving adventurer with a passion for creating memorable moments.
+          Looking for someone to share laughter and adventures with.
         </p>
       </div>
 
@@ -50,6 +56,14 @@ const Dashboard = ({ currentUser }) => {
         </div>
       </div>
 
+      {/* Message Icon - Link to Messages Component */}
+      <Link
+        to="/messages"
+        className="fixed bottom-8 right-8 text-3xl text-white"
+      >
+        <FontAwesomeIcon icon={faComment} />
+      </Link>
+
       {/* Recent Activity Section */}
       <div className="bg-white p-6 rounded-lg shadow-md max-w-3xl mx-auto">
         <h2 className="text-3xl font-bold mb-6">Recent Activity</h2>
@@ -59,7 +73,9 @@ const Dashboard = ({ currentUser }) => {
         </div>
         <div className="flex items-center space-x-4 mb-4">
           <FontAwesomeIcon icon={faComment} className="text-blue-500" />
-          <p className="text-gray-600">You received a message from Alex Johnson</p>
+          <p className="text-gray-600">
+            You received a message from Alex Johnson
+          </p>
         </div>
         <div className="flex items-center space-x-4">
           <FontAwesomeIcon icon={faUserFriends} className="text-green-500" />

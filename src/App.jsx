@@ -5,6 +5,8 @@ import app from './firebase'
 import Home from './Home';
 import Register from './Register';
 import Dashboard from './Dashboard';
+import Messages from './Messages';
+import Login from './Login'
 
 const App = () => {
   const [ currentUser, setCurrentUser] = useState({})
@@ -51,6 +53,8 @@ const App = () => {
         <Route path="/" exact element={<Home/>} />
         <Route path="/register" element={<Register handleGoogleClick={handleGoogleClick} setCurrentUser={setCurrentUser}/>} />
         <Route path="/dashboard" element={<Dashboard currentUser={currentUser}/>} />
+        <Route path="/messages" element={<Messages/>} />
+        <Route path="/login" element={<Login handleGoogleClick={handleGoogleClick}/>}/>
       </Routes>
   );
 };
